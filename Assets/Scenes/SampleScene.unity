@@ -297,9 +297,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 5477689259824969851, guid: fc8463c73273d7842b8ce224a4e30ee8, type: 3}
   SpawnBall: {fileID: 984412071}
+  shadowtime: 0.1
   Force: 100
   directionZ: 10
   directionY: 2
+  balls: 0
 --- !u!114 &12444263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803bc083e8b55d3469f8fd9f3119cf0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 5477689259824969851, guid: fc8463c73273d7842b8ce224a4e30ee8, type: 3}
 --- !u!1 &374662208
 GameObject:
   m_ObjectHideFlags: 0

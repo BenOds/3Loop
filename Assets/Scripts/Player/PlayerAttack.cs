@@ -21,6 +21,9 @@ public class PlayerAttack : MonoBehaviour
     public float directionZ;
     public float directionY;
 
+    [Header("Ammo")]
+    public int balls;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +41,10 @@ public class PlayerAttack : MonoBehaviour
 
     void InputKey()
     {
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            balls = 10;
+        }
     }
 
     void InputMouse()
@@ -61,8 +67,12 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
+        if (balls > 0)
+        {
         GameObject cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
+        balls--;
+        }
     }
 
 // ---------------------- DEACTIVATE COLLISION ---------------------
