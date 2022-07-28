@@ -10,21 +10,13 @@ public class SquareMovement : MonoBehaviour
 
     float delta;
 
-    [Header("GameObjects Assignments")]
-    public GameObject ballPrefab;
-    public Transform SpawnBall;
-
-    [Header("Force")]
-    public int Force;
-    public float directionZ;
-    public float directionY;
-
     [Header("Movement")]
     public int speed;
     public int rotateSpeed;
 
 
 // -------------- Inicializers ---------------------
+
     void Awake()
     {
         Assignments();
@@ -38,10 +30,9 @@ public class SquareMovement : MonoBehaviour
     void Update()
     {
         Movement();
-        InputMouse();
-        InputKey();
-        InputPad();
+
     }
+
 // ----------------------- Assignments ---------------
 
     void Assignments()
@@ -49,28 +40,8 @@ public class SquareMovement : MonoBehaviour
         delta = Time.deltaTime;
     }
 
-
-// ---------------------- INPUTS ---------------------
-
-    void InputKey()
-    {
-
-    }
-
-    void InputMouse()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Attack();
-        }
-    }
-
-    void InputPad()
-    {
-
-    }
-
 // ---------------------- MÉTODOS ---------------------
+
     void Movement()
     {
         h = Input.GetAxis("Horizontal");
@@ -83,11 +54,6 @@ public class SquareMovement : MonoBehaviour
         //transform.Rotate(Vector3.down *Time.deltaTime*v*speed);
     }
 
-    void Attack()
-    {
-        GameObject cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
-        cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);
-        
-    }
+
    
 }

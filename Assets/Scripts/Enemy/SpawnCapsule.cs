@@ -15,8 +15,7 @@ public class SpawnCapsule : MonoBehaviour
 
     void Start()
     {
-        PositionSpawn();
-        
+        PositionSpawn(); 
     }
 
     void Update()
