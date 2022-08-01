@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 12444257}
   - component: {fileID: 12444256}
   - component: {fileID: 12444255}
-  - component: {fileID: 12444251}
   - component: {fileID: 12444262}
   - component: {fileID: 12444259}
   - component: {fileID: 12444260}
@@ -148,20 +147,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &12444251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12444250}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b482799647e31f94db945a444c7e0071, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb2: {fileID: 0}
-  speed: 20
 --- !u!65 &12444255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -255,6 +240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   rotateSpeed: 50
+  jump: 0
+  shadowtime: 0
 --- !u!114 &12444260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,11 +284,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 5477689259824969851, guid: fc8463c73273d7842b8ce224a4e30ee8, type: 3}
   SpawnBall: {fileID: 984412071}
-  shadowtime: 0.1
   Force: 100
   directionZ: 10
   directionY: 2
-  balls: 0
+  balls: 6
 --- !u!114 &12444263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,7 +458,7 @@ GameObject:
   - component: {fileID: 514768830}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
