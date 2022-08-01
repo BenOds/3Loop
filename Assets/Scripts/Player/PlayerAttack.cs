@@ -23,10 +23,12 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Ammo")]
     public int balls;
+    int reload;
 
     // Start is called before the first frame update
     void Start()
     {
+        reload = GetComponent<PlayerAttack>().balls;
         shadow = gameObject.GetComponent<BoxCollider>();
     }
 
@@ -41,9 +43,10 @@ public class PlayerAttack : MonoBehaviour
 
     void InputKey()
     {
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
-            balls = 10;
+            balls = reload;
         }
     }
 

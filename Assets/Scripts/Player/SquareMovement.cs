@@ -14,6 +14,10 @@ public class SquareMovement : MonoBehaviour
     public int speed;
     public int rotateSpeed;
 
+    public int jump;
+
+    bool suelo;
+
 
 // -------------- Inicializers ---------------------
 
@@ -30,6 +34,7 @@ public class SquareMovement : MonoBehaviour
     void Update()
     {
         Movement();
+        Jump();
 
     }
 
@@ -52,6 +57,33 @@ public class SquareMovement : MonoBehaviour
 
         transform.Rotate(Vector3.up * delta * h * rotateSpeed);
         //transform.Rotate(Vector3.down *Time.deltaTime*v*speed);
+    }
+
+        void Jump()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && (suelo = true))
+        {
+            Rigidbody rig = GetComponent<Rigidbody>();
+            rig.AddForce (new Vector3 (0,9,0) * jump);
+            Debug.Log("jump");
+        }
+    }
+
+    void OnCollisionStay (Collision CollisionFloor)
+    {
+
+        if(CollisionFloor.collider.CompareTag("Floor"))
+        {
+            suelo = true;
+            Debug.Log("tocando suelo");
+
+        }
+        else
+        {   
+            suelo = false;
+            Debug.Log("No toco suelo");
+        }
+
     }
 
 
