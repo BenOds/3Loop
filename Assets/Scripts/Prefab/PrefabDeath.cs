@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PrefabDeath : MonoBehaviour
 {
-    // Start is called before the first frame update
+    GameObject player;
+    PlayerAttack playerattack;
+
     void Start()
     {
-     
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerattack = player.GetComponent<PlayerAttack>();
+
     }
 
     // Update is called once per frame
@@ -15,11 +19,14 @@ public class PrefabDeath : MonoBehaviour
     {
         
     }
-        void OnCollisionEnter(Collision collision)
+
+
+    void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Player"))
         {
             Destroy(gameObject);
+            playerattack.count++;
         }
     }
 }

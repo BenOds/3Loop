@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Colission off gate")]
     public float shadowtime;
+    bool touching;
 
 
     [Header("Direction Force")]
@@ -26,13 +27,15 @@ public class PlayerAttack : MonoBehaviour
     int reload;
     string[] ammo;
 
+    public int count;
+
     
 
 // -------------- Inicializers ---------------------
 
     void Start()
     {
-        reload = GetComponent<PlayerAttack>().balls;
+        count = balls;
         shadow = gameObject.GetComponent<BoxCollider>();
         string[] ammo = new string [6];
     }
@@ -72,6 +75,7 @@ public class PlayerAttack : MonoBehaviour
         GameObject cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
         balls--;
+        count--;
         }
     }
 
@@ -100,6 +104,19 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- AMMO ---------------------
 
+    void OnCollisionEnter (Collision CollisionBullet)
+    {
+
+        if(CollisionBullet.collider.CompareTag("Ball"))
+        {
+            touching = true;
+            Debug.Log("Recogiendo bala");
+
+        }
+
+
+    }
+
     void Ammo()
     {
         string bullet1 = "Dum Dum nº1";
@@ -126,14 +143,13 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    void Reload()
+    public void Reload()
     {
+      
             if (Input.GetKeyDown(KeyCode.R))
         {
-            balls = reload;
+            balls = count;
         }
     }
-
-
 
 }
