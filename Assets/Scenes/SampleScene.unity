@@ -241,7 +241,6 @@ MonoBehaviour:
   speed: 2
   rotateSpeed: 50
   jump: 0
-  shadowtime: 0
 --- !u!114 &12444260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +267,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!114 &12444262
 MonoBehaviour:
@@ -284,6 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 5477689259824969851, guid: fc8463c73273d7842b8ce224a4e30ee8, type: 3}
   SpawnBall: {fileID: 984412071}
+  shadowtime: 0.1
   Force: 100
   directionZ: 10
   directionY: 2

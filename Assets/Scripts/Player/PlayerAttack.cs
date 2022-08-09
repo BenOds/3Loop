@@ -24,41 +24,38 @@ public class PlayerAttack : MonoBehaviour
     [Header("Ammo")]
     public int balls;
     int reload;
+    string[] ammo;
 
-    // Start is called before the first frame update
+    
+
+// -------------- Inicializers ---------------------
+
     void Start()
     {
         reload = GetComponent<PlayerAttack>().balls;
         shadow = gameObject.GetComponent<BoxCollider>();
+        string[] ammo = new string [6];
     }
 
-    // Update is called once per frame
     void Update()
     {
         InputMouse();
         InputKey();
         InputPad();
+        
     }
-    // ---------------------- INPUTS ---------------------
+// ---------------------- INPUTS ---------------------
 
     void InputKey()
     {
         
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            balls = reload;
-        }
+        Reload();
+        AmmoCheck();
     }
 
     void InputMouse()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            CollisionOff();
-            Invoke("CollisionOn",shadowtime);
-            Attack();
-            
-        }
+        CollissionOnOff();
     }
 
     void InputPad()
@@ -67,7 +64,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
 // ---------------------- MÉTODOS ---------------------
-
+ 
     void Attack()
     {
         if (balls > 0)
@@ -80,6 +77,17 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- DEACTIVATE COLLISION ---------------------
 
+    void CollissionOnOff()
+    {
+                if(Input.GetMouseButtonDown(0))
+        {
+            CollisionOff();
+            Invoke("CollisionOn",shadowtime);
+            Attack();
+            
+        }
+    }
+
      void CollisionOff()
     {    
         shadow.enabled = false ;
@@ -89,5 +97,43 @@ public class PlayerAttack : MonoBehaviour
     {
         shadow.enabled = true ;
     }
+
+// ---------------------- AMMO ---------------------
+
+    void Ammo()
+    {
+        string bullet1 = "Dum Dum nº1";
+        string bullet2 = "Dum Dum nº2";
+        string bullet3 = "Dum Dum nº3";
+        string bullet4 = "Dum Dum nº4";
+        string bullet5 = "Dum Dum nº5";
+        string bullet6 = "Dum Dum nº6";
+
+        ammo[0] = bullet1;
+        ammo[1] = bullet2;
+        ammo[2] = bullet3;
+        ammo[3] = bullet4;
+        ammo[4] = bullet5;
+        ammo[5] = bullet6;
+        
+    }
+
+    void AmmoCheck()
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log(ammo[0]);
+        }
+    }
+
+    void Reload()
+    {
+            if (Input.GetKeyDown(KeyCode.R))
+        {
+            balls = reload;
+        }
+    }
+
+
 
 }
