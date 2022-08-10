@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     string[] ammo;
 
     public int count;
-
+    GameObject cloneball;
     
 
 // -------------- Inicializers ---------------------
@@ -72,11 +72,12 @@ public class PlayerAttack : MonoBehaviour
     {
         if (balls > 0)
         {
-        GameObject cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
+        cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
+        Naming();
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
         balls--;
         count--;
-        }
+        } 
     }
 
 // ---------------------- DEACTIVATE COLLISION ---------------------
@@ -104,6 +105,7 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- AMMO ---------------------
 
+    // Recoger bala
     void OnCollisionEnter (Collision CollisionBullet)
     {
 
@@ -117,6 +119,7 @@ public class PlayerAttack : MonoBehaviour
 
     }
 
+    // Naming balas
     void Ammo()
     {
         string bullet1 = "Dum Dum nº1";
@@ -126,15 +129,24 @@ public class PlayerAttack : MonoBehaviour
         string bullet5 = "Dum Dum nº5";
         string bullet6 = "Dum Dum nº6";
 
-        ammo[0] = bullet1;
+        ammo[0] = "Dum Dum nº1";
         ammo[1] = bullet2;
         ammo[2] = bullet3;
         ammo[3] = bullet4;
         ammo[4] = bullet5;
-        ammo[5] = bullet6;
-        
+        ammo[5] = bullet6;      
     }
 
+
+    void Naming()
+    {
+        string name;
+        name = ammo[0];
+        
+    cloneball.name = name;
+
+    }
+ 
     void AmmoCheck()
     {
         if(Input.GetKeyDown(KeyCode.Q))
