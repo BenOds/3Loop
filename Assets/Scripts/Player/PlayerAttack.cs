@@ -120,7 +120,7 @@ public class PlayerAttack : MonoBehaviour
         {   
             if (balls > 0)
             {
-                for(int i = 5; i <= (balls-1) ; i--)
+                for(int i = (balls-1); i >= 0 ; i--)
                 {
                 Debug.Log(ammo[i] +", ");
                 }
