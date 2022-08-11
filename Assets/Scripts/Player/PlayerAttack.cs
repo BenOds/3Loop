@@ -26,8 +26,8 @@ public class PlayerAttack : MonoBehaviour
     public int balls;
     int reload;
     string[] ammo;
-
     public int count;
+
     GameObject cloneball;
     GameObject ballborn;
     
@@ -37,7 +37,8 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         count = balls;
-        string[] ammo = new string [6];
+        ammo = new string [6];
+        Ammo();
     }
 
     void Update()
@@ -60,7 +61,6 @@ public class PlayerAttack : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Attack();
-            Invoke("TagChange",shadowtime);
         }
         
     }
@@ -78,56 +78,41 @@ public class PlayerAttack : MonoBehaviour
         {
         cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
+        Naming();
         balls--;
         count--;
+
+        Invoke("TagChange",shadowtime);
         } 
     }
-
-// ---------------------- DEACTIVATE COLLISION ---------------------
-
 
 // ---------------------- AMMO ---------------------
 
     // Recoger bala
     void OnCollisionEnter (Collision CollisionBullet)
     {
-
         if(CollisionBullet.collider.CompareTag("Ball"))
         {
             touching = true;
             Debug.Log("Recogiendo bala");
-
         }
-
-
     }
 
     // Naming balas
     void Ammo()
     {
-        string bullet1 = "Dum Dum nº1";
-        string bullet2 = "Dum Dum nº2";
-        string bullet3 = "Dum Dum nº3";
-        string bullet4 = "Dum Dum nº4";
-        string bullet5 = "Dum Dum nº5";
-        string bullet6 = "Dum Dum nº6";
-
         ammo[0] = "Dum Dum nº1";
-        ammo[1] = bullet2;
-        ammo[2] = bullet3;
-        ammo[3] = bullet4;
-        ammo[4] = bullet5;
-        ammo[5] = bullet6;      
+        ammo[1] = "Dum Dum nº2";
+        ammo[2] = "Dum Dum nº3";
+        ammo[3] = "Dum Dum nº4";
+        ammo[4] = "Dum Dum nº5";
+        ammo[5] = "Dum Dum nº6";            
     }
-
 
     void Naming()
     {
-        string name;
-        name = ammo[0];
-        
-    cloneball.name = name;
-
+        cloneball.name = ammo[0];
+        //cloneball.name = "pepe";
     }
  
     void AmmoCheck()
@@ -155,5 +140,4 @@ public class PlayerAttack : MonoBehaviour
         
         Debug.Log("nariz disparada");
     }
-
 }
