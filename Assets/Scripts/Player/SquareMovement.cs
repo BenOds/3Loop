@@ -61,7 +61,7 @@ public class SquareMovement : MonoBehaviour
 
         void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && (suelo = true))
+        if(Input.GetKeyDown(KeyCode.Space) && (suelo == true))
         {
             Rigidbody rig = GetComponent<Rigidbody>();
             rig.AddForce (new Vector3 (0,9,0) * jump);

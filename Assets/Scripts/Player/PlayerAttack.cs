@@ -29,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
 
     public int count;
     GameObject cloneball;
+    GameObject ballborn;
     
 
 // -------------- Inicializers ---------------------
@@ -36,7 +37,6 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         count = balls;
-        shadow = gameObject.GetComponent<BoxCollider>();
         string[] ammo = new string [6];
     }
 
@@ -51,14 +51,18 @@ public class PlayerAttack : MonoBehaviour
 
     void InputKey()
     {
-        
         Reload();
         AmmoCheck();
     }
 
     void InputMouse()
     {
-        CollissionOnOff();
+        if(Input.GetMouseButtonDown(0))
+        {
+            Attack();
+            Invoke("TagChange",shadowtime);
+        }
+        
     }
 
     void InputPad()
@@ -73,7 +77,6 @@ public class PlayerAttack : MonoBehaviour
         if (balls > 0)
         {
         cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
-        Naming();
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
         balls--;
         count--;
@@ -82,26 +85,6 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- DEACTIVATE COLLISION ---------------------
 
-    void CollissionOnOff()
-    {
-                if(Input.GetMouseButtonDown(0))
-        {
-            CollisionOff();
-            Invoke("CollisionOn",shadowtime);
-            Attack();
-            
-        }
-    }
-
-     void CollisionOff()
-    {    
-        shadow.enabled = false ;
-    }
-
-    void CollisionOn()
-    {
-        shadow.enabled = true ;
-    }
 
 // ---------------------- AMMO ---------------------
 
@@ -162,6 +145,15 @@ public class PlayerAttack : MonoBehaviour
         {
             balls = count;
         }
+    }
+
+    void TagChange()
+    {
+        ballborn = GameObject.FindGameObjectWithTag("BallBorn");
+        ballborn.GetComponent<SphereCollider>().enabled = true;
+        ballborn.tag = "Ball";
+        
+        Debug.Log("nariz disparada");
     }
 
 }
