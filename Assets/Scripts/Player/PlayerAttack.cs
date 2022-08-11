@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        count = balls;
+        count = 0;
         ammo = new string [6];
         Ammo();
     }
@@ -80,8 +80,7 @@ public class PlayerAttack : MonoBehaviour
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
         Naming();
         balls--;
-        count--;
-
+        
         Invoke("TagChange",shadowtime);
         } 
     }
@@ -118,9 +117,20 @@ public class PlayerAttack : MonoBehaviour
     void AmmoCheck()
     {
         if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log(ammo[0]);
+        {   
+            if (balls > 0)
+            {
+                for(int i = 5; i <= (balls-1) ; i--)
+                {
+                Debug.Log(ammo[i] +", ");
+                }
+            }
+            else
+            {
+                Debug.Log("No hay narices");
+            }
         }
+
     }
 
     public void Reload()
@@ -128,7 +138,8 @@ public class PlayerAttack : MonoBehaviour
       
             if (Input.GetKeyDown(KeyCode.R))
         {
-            balls = count;
+            balls = count + balls;
+            count = 0;
         }
     }
 
