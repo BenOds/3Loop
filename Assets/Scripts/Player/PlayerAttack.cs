@@ -80,7 +80,7 @@ public class PlayerAttack : MonoBehaviour
 // Método para cuando queramos lanzar una "nariz"
 // Instanciamos el prefab "nose prefab"
 // Llamamos al método Namig para adjudicar nombre al prefab generado del array
-// Restamos en el contador de "balls" caad vez que generamos un prefab
+// Restamos en el contador de "balls" cada vez que generamos un prefab
 // Cambiamos el tag del prefab generado. De "ballBorn" a "ball"
 // Borramos el nombre que hemos adjudicado al prefab del array
 
@@ -102,12 +102,14 @@ public class PlayerAttack : MonoBehaviour
 
 // Detector de collision con nose prefab para "recolectar"
 // Aprovechamos para identificar el nombre que tiene adjudicado para listarlo en el array
+// Renombramos la ubicación del array con el nombre del rpefab que hemos recolectado.
     void OnCollisionEnter (Collision collisionBullet)
     {
         if(collisionBullet.collider.CompareTag("Ball"))
         {
             rename = collisionBullet.gameObject.name;
             Debug.Log("Recogiendo bala "+ rename);
+            Renaming();
         }
     }
 
