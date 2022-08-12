@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     [Header("Ammo")]
     public int balls;
     public int count;
+    public int counting;
+
     int reload;
     public string[] ammo;
 
@@ -39,11 +41,13 @@ public class PlayerAttack : MonoBehaviour
     {
         count = 0;
         ammo = new string [6];
+
         Ammo();
     }
 
     void Update()
     {
+        counting = balls+count;
         InputMouse();
         InputKey();
         InputPad();
@@ -73,6 +77,13 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- MÉTODOS ---------------------
  
+// Método para cuando queramos lanzar una "nariz"
+// Instanciamos el prefab "nose prefab"
+// Llamamos al método Namig para adjudicar nombre al prefab generado del array
+// Restamos en el contador de "balls" caad vez que generamos un prefab
+// Cambiamos el tag del prefab generado. De "ballBorn" a "ball"
+// Borramos el nombre que hemos adjudicado al prefab del array
+
     void Attack()
     {
         if (balls > 0)
@@ -89,7 +100,8 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- AMMO ---------------------
 
-    // Recoger bala
+// Detector de collision con nose prefab para "recolectar"
+// Aprovechamos para identificar el nombre que tiene adjudicado para listarlo en el array
     void OnCollisionEnter (Collision collisionBullet)
     {
         if(collisionBullet.collider.CompareTag("Ball"))
@@ -99,7 +111,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // Naming balas
+// Los nombres de las narices en el array.
     void Ammo()
     {
         ammo[0] = "Sherif";
@@ -110,21 +122,26 @@ public class PlayerAttack : MonoBehaviour
         ammo[5] = "Mexican";            
     }
 
+// Para cambiar el nombre del "nose prefab" cuando se genera por uno de los que se ha escogido.
     void Naming()
-    {
+    { 
         cloneball.name = ammo[balls-1];
     }
+
+// Para cambiar el nombre en el array, por el del "nose prefab" que hemos recolectado
+    // en la ubicación que indicamos.
     public void Renaming()
     {
-        int counting = balls+count-1;
         ammo[counting] = rename;
     }
 
+//  Borra los nombres en el Array a medida que el prefab "nose Prefab" se genera
     void Erase()
     {
         ammo[balls] = "";
     }
  
+//  Input para comprobar por consola el orden de los nombres. 
     void AmmoCheck()
     {
         if(Input.GetKeyDown(KeyCode.Q))
@@ -143,6 +160,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+// Input para "recargar" con "nose prefab" que se ha ido recolectando.
     public void Reload()
     {
       
@@ -153,6 +171,10 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+// Cambio de tag para el nose prefab que de origen es "ballBorn" y lo cambiamos por "ball"
+// Esto se hace para que cuando identifiquemos el prefab recién generado y activemos su collider
+    // no haya conflicto con posibles prefabs generados anteriormente.
+// Lo mismo sirve para cambiarles el nombre.
     void TagChange()
     {
         ballborn = GameObject.FindGameObjectWithTag("BallBorn");
