@@ -241,6 +241,7 @@ MonoBehaviour:
   speed: 2
   rotateSpeed: 50
   jump: 50
+  suelo: 0
 --- !u!114 &12444260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +290,8 @@ MonoBehaviour:
   directionY: 2
   balls: 6
   count: 0
+  counting: 0
+  ammo: []
 --- !u!114 &12444263
 MonoBehaviour:
   m_ObjectHideFlags: 0

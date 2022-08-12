@@ -16,7 +16,7 @@ public class SquareMovement : MonoBehaviour
 
     public int jump;
 
-    bool suelo;
+    public bool suelo;
 
 
 // -------------- Inicializers ---------------------
@@ -47,7 +47,13 @@ public class SquareMovement : MonoBehaviour
 
 // ---------------------- MÉTODOS ---------------------
 
-    void Movement()
+void OnCollisionStay (Collision CollisionFloor)
+    {
+        suelo = true;
+        Debug.Log("tocando suelo");
+    }
+
+void Movement()
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
@@ -59,32 +65,23 @@ public class SquareMovement : MonoBehaviour
         //transform.Rotate(Vector3.down *Time.deltaTime*v*speed);
     }
 
-        void Jump()
+void Jump()
     {
         if(Input.GetKeyDown(KeyCode.Space) && (suelo == true))
         {
             Rigidbody rig = GetComponent<Rigidbody>();
             rig.AddForce (new Vector3 (0,9,0) * jump);
             Debug.Log("jump");
+            Invoke("Suelo", 0.01f);
         }
     }
 
-    void OnCollisionStay (Collision CollisionFloor)
-    {
+void Suelo()
+{
+    suelo = false;
+}
 
-        if(CollisionFloor.collider.CompareTag("Floor"))
-        {
-            suelo = true;
-            Debug.Log("tocando suelo");
-
-        }
-        else
-        {   
-            suelo = false;
-            Debug.Log("No toco suelo");
-        }
-
-    }
+  
 
 
    
