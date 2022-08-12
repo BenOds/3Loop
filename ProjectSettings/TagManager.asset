@@ -9,6 +9,7 @@ TagManager:
   - Ball
   - Master
   - Floor
+  - BallBorn
   layers:
   - Default
   - TransparentFX

@@ -14,8 +14,6 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Colission off gate")]
     public float shadowtime;
-    bool touching;
-
 
     [Header("Direction Force")]
     public int Force;
@@ -24,9 +22,12 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Ammo")]
     public int balls;
-    int reload;
-    string[] ammo;
     public int count;
+    int reload;
+    public string[] ammo;
+
+    string rename;
+    
 
     GameObject cloneball;
     GameObject ballborn;
@@ -82,36 +83,46 @@ public class PlayerAttack : MonoBehaviour
         balls--;
         
         Invoke("TagChange",shadowtime);
+        Erase();
         } 
     }
 
 // ---------------------- AMMO ---------------------
 
     // Recoger bala
-    void OnCollisionEnter (Collision CollisionBullet)
+    void OnCollisionEnter (Collision collisionBullet)
     {
-        if(CollisionBullet.collider.CompareTag("Ball"))
+        if(collisionBullet.collider.CompareTag("Ball"))
         {
-            touching = true;
-            Debug.Log("Recogiendo bala");
+            rename = collisionBullet.gameObject.name;
+            Debug.Log("Recogiendo bala "+ rename);
         }
     }
 
     // Naming balas
     void Ammo()
     {
-        ammo[0] = "Dum Dum nº1";
-        ammo[1] = "Dum Dum nº2";
-        ammo[2] = "Dum Dum nº3";
-        ammo[3] = "Dum Dum nº4";
-        ammo[4] = "Dum Dum nº5";
-        ammo[5] = "Dum Dum nº6";            
+        ammo[0] = "Sherif";
+        ammo[1] = "Tabern";
+        ammo[2] = "Train Driver";
+        ammo[3] = "Gold Miner";
+        ammo[4] = "Indian";
+        ammo[5] = "Mexican";            
     }
 
     void Naming()
     {
-        cloneball.name = ammo[0];
-        //cloneball.name = "pepe";
+        cloneball.name = ammo[balls-1];
+    }
+    public void Renaming()
+    {
+        int counting = balls+count-1;
+        ammo[counting] = rename;
+    }
+
+    void Erase()
+    {
+        ammo[balls] = "";
     }
  
     void AmmoCheck()
@@ -122,7 +133,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 for(int i = (balls-1); i >= 0 ; i--)
                 {
-                Debug.Log(ammo[i] +", ");
+                Debug.Log(ammo[i]);
                 }
             }
             else
@@ -130,7 +141,6 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("No hay narices");
             }
         }
-
     }
 
     public void Reload()

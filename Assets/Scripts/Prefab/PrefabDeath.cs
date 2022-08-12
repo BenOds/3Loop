@@ -7,10 +7,12 @@ public class PrefabDeath : MonoBehaviour
     GameObject player;
     PlayerAttack playerattack;
 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerattack = player.GetComponent<PlayerAttack>();
+
 
     }
 
@@ -25,8 +27,10 @@ public class PrefabDeath : MonoBehaviour
     {
         if(collision.collider.CompareTag("Player"))
         {
-            Destroy(gameObject);
             playerattack.count++;
+            playerattack.Renaming();
+            Destroy(gameObject);
+            
         }
     }
 }
