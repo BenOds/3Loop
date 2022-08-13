@@ -35,7 +35,7 @@ public class SquareMovement : MonoBehaviour
     {
         Movement();
         Jump();
-
+        Respawn();
     }
 
 // ----------------------- Assignments ---------------
@@ -75,6 +75,14 @@ void Jump()
             Invoke("Suelo", 0.01f);
         }
     }
+
+void Respawn()
+{
+    if(Input.GetKeyDown(KeyCode.T))
+    {
+        transform.position = new Vector3(0,1,0);
+    }
+}
 
 void Suelo()
 {
