@@ -37,7 +37,7 @@ public class Chassing : MonoBehaviour
         if( chassingBoolean == true)
         {
             // rb.velocity = new Vector3(0,0,0);
-            transform.Translate(direction * speed * Time.deltaTime);
+            // transform.Translate(direction * speed * Time.deltaTime);
             transform.position = Vector3.MoveTowards(positionNouse, positionPlayer, 
                             speed * Time.deltaTime);
         }

@@ -8,9 +8,9 @@ public class ChangeMaterial : MonoBehaviour
 
     int live = 10;
 
-    public SpawnCapsule rebirth;
+    // public SpawnCapsule rebirth;
 
-    Material accessMesh;
+    Renderer accessMesh;
 
     SpawnCapsule spawnCapsule;
 
@@ -23,7 +23,6 @@ public class ChangeMaterial : MonoBehaviour
 
     void Start()
     {
-        // spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
        // accessMesh = new Material (GetComponent<MeshRenderer>().material);
     }
 
@@ -34,7 +33,7 @@ public class ChangeMaterial : MonoBehaviour
 
     void AccessMesh()
     {
-        accessMesh = new Material (GetComponent<MeshRenderer>().material);
+        accessMesh = GetComponent<MeshRenderer>();
     }
     
     void OnCollisionEnter(Collision collision)
@@ -49,22 +48,25 @@ public class ChangeMaterial : MonoBehaviour
     {
         if(live >= 7)
         {
-           accessMesh = mat;
+           accessMesh.material = new Material (mat);
+           Debug.Log("Color VERDE");
         }
         else if ( live >= 4)
         {
-            accessMesh = mat2;
+           accessMesh.material = new Material (mat2);
+           Debug.Log("Color AMARILLO");
+
         }
         else if (live >= 2)
         {
-            accessMesh = mat3;
+           accessMesh.material = new Material (mat3);
+           Debug.Log("Color ROJO");
+
         }
         else if (live >=0)
         {
-
             SpawnCapsule();
             Destroy(gameObject);
-
         }
     }
 
