@@ -19,7 +19,6 @@ public class Chassing : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        chassingBoolean = false;
         player = GameObject.FindGameObjectWithTag("Player"); 
         Invoke("ChassingBoolean", chassingTime);
     }
@@ -27,31 +26,27 @@ public class Chassing : MonoBehaviour
     void Update()
     {
         PositionPlayer();
-        // transform.LookAt(player.transform);
         ChassingPlayer();
         PositionNouseCheck();
     }
 
     void ChassingPlayer()
     {   
-        if( chassingBoolean == true)
+        if( Input.GetKeyDown(KeyCode.F))
         {
-            // rb.velocity = new Vector3(0,0,0);
-            // transform.Translate(direction * speed * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(positionNouse, positionPlayer, 
-                            speed * Time.deltaTime);
+            chassingBoolean = true;
         }
-    }
 
-    void ChassingBoolean()
-    {
-        chassingBoolean = true;
+        if (chassingBoolean == true)
+        {
+            transform.position = Vector3.MoveTowards(positionNouse, positionPlayer, 
+                                    speed * Time.deltaTime);
+        }
     }
 
     void PositionPlayer()
     {
         positionPlayer = player.transform.position;
-        // direction = positionPlayer - transform.position;
     }
 
     void PositionNouseCheck()
