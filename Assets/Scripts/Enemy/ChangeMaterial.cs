@@ -17,12 +17,19 @@ public class ChangeMaterial : MonoBehaviour
     void Awake()
     {
         AccessMesh();
+        AccesScript();
+
     }
 
     void Start()
     {
         // spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
        // accessMesh = new Material (GetComponent<MeshRenderer>().material);
+    }
+
+    void Update()
+    {
+        CheckLife();
     }
 
     void AccessMesh()
@@ -36,7 +43,10 @@ public class ChangeMaterial : MonoBehaviour
         {
             live --;
         }
-        
+    }
+
+    void CheckLife()
+    {
         if(live >= 7)
         {
            accessMesh = mat;
@@ -52,7 +62,7 @@ public class ChangeMaterial : MonoBehaviour
         else if (live >=0)
         {
 
-            AccesScript();
+            SpawnCapsule();
             Destroy(gameObject);
 
         }
@@ -60,9 +70,13 @@ public class ChangeMaterial : MonoBehaviour
 
     void AccesScript()
     {
-            GameObject rebirth = GameObject.Find("SpawnEnemy");
-            spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
-            spawnCapsule.PositionSpawn();
+            GameObject rebirthObject = GameObject.Find("SpawnEnemy");
+            spawnCapsule = rebirthObject.GetComponent<SpawnCapsule>();
+    }
+
+    void SpawnCapsule()
+    {
+        spawnCapsule.PositionSpawn();
     }
 
     

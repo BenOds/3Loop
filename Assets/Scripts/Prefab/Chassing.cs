@@ -6,33 +6,40 @@ public class Chassing : MonoBehaviour
 {
     GameObject player;
     public Vector3 positionPlayer;
+    Vector3 positionNouse;
+
 
     Vector3 direction;
     public float speed;
 
     bool chassingBoolean;
+    public int chassingTime;
+    Rigidbody rb;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         chassingBoolean = false;
         player = GameObject.FindGameObjectWithTag("Player"); 
-        Invoke("ChassingBoolean", 5);
+        Invoke("ChassingBoolean", chassingTime);
     }
 
     void Update()
     {
         PositionPlayer();
-        //transform.LookAt(player.transform);
+        // transform.LookAt(player.transform);
         ChassingPlayer();
+        PositionNouseCheck();
     }
 
     void ChassingPlayer()
     {   
         if( chassingBoolean == true)
         {
-        //transform.Translate(direction * speed * Time.deltaTime);
-        transform.Translate(Vector3.MoveTowards(transform.position, positionPlayer, 
-                            speed * Time.deltaTime));
+            // rb.velocity = new Vector3(0,0,0);
+            transform.Translate(direction * speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(positionNouse, positionPlayer, 
+                            speed * Time.deltaTime);
         }
     }
 
@@ -44,6 +51,11 @@ public class Chassing : MonoBehaviour
     void PositionPlayer()
     {
         positionPlayer = player.transform.position;
-        direction = positionPlayer - transform.position;
+        // direction = positionPlayer - transform.position;
+    }
+
+    void PositionNouseCheck()
+    {
+        positionNouse = transform.position;
     }
 }
