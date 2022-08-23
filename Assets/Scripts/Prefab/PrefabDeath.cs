@@ -13,15 +13,22 @@ public class PrefabDeath : MonoBehaviour
     ChangeMaterial health;
     GameObject enemy;
 
+    GameObject parent;
+    Transform child;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerattack = player.GetComponent<PlayerAttack>();
         rb = GetComponent<Rigidbody>();
+
         damage = true;
         enemy = GameObject.FindGameObjectWithTag("Enemy");
         health = enemy.GetComponent<ChangeMaterial>();
+
+        parent = GameObject.FindGameObjectWithTag("BallParent");
+        
+        CheckingChild();
 
     }
 
@@ -51,6 +58,11 @@ public class PrefabDeath : MonoBehaviour
         {
             health.live--;
         }
+    }
+
+    void CheckingChild()
+    {
+        gameObject.transform.SetParent(parent.transform,true);
     }
 
 
