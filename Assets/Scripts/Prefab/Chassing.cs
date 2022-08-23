@@ -20,7 +20,6 @@ public class Chassing : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player"); 
-        Invoke("ChassingBoolean", chassingTime);
     }
 
     void Update()
