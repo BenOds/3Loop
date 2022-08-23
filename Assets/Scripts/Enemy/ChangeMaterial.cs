@@ -12,6 +12,8 @@ public class ChangeMaterial : MonoBehaviour
 
     Material accessMesh;
 
+    SpawnCapsule spawnCapsule;
+
     void Awake()
     {
         AccessMesh();
@@ -19,9 +21,15 @@ public class ChangeMaterial : MonoBehaviour
 
     void Start()
     {
-        
+        // spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
+       // accessMesh = new Material (GetComponent<MeshRenderer>().material);
     }
 
+    void AccessMesh()
+    {
+        accessMesh = new Material (GetComponent<MeshRenderer>().material);
+    }
+    
     void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Ball"))
@@ -31,15 +39,15 @@ public class ChangeMaterial : MonoBehaviour
         
         if(live >= 7)
         {
-           GetComponent<MeshRenderer>().material = mat;
+           accessMesh = mat;
         }
         else if ( live >= 4)
         {
-            GetComponent<MeshRenderer>().material = mat2;
+            accessMesh = mat2;
         }
         else if (live >= 2)
         {
-            GetComponent<MeshRenderer>().material = mat3;
+            accessMesh = mat3;
         }
         else if (live >=0)
         {
@@ -53,12 +61,9 @@ public class ChangeMaterial : MonoBehaviour
     void AccesScript()
     {
             GameObject rebirth = GameObject.Find("SpawnEnemy");
-            SpawnCapsule spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
+            spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
             spawnCapsule.PositionSpawn();
     }
-    void AccessMesh()
-    {
-        accessMesh = new Material (GetComponent<MeshRenderer>().material);
-    }
+
     
 }

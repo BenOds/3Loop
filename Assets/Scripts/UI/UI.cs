@@ -8,10 +8,10 @@ using TMPro;
 public class UI : MonoBehaviour
 {
 
-    string textUI;
+    //string textUI;
     void Start()
     {
-        textUI = GetComponent<TextMeshPro>().text;
+       // textUI = GetComponent<TextMeshPro>().text;
     }
 
     void Update()
