@@ -6,9 +6,10 @@ public class ChangeMaterial : MonoBehaviour
 {
     public Material mat, mat2, mat3;
 
-    int live = 10;
+    public int live = 10;
+    GameObject ball;
 
-    // public SpawnCapsule rebirth;
+    // bool damage = false;
 
     Renderer accessMesh;
 
@@ -23,7 +24,7 @@ public class ChangeMaterial : MonoBehaviour
 
     void Start()
     {
-       // accessMesh = new Material (GetComponent<MeshRenderer>().material);
+        
     }
 
     void Update()
@@ -36,13 +37,7 @@ public class ChangeMaterial : MonoBehaviour
         accessMesh = GetComponent<MeshRenderer>();
     }
     
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Ball"))
-        {
-            live --;
-        }
-    }
+
 
     void CheckLife()
     {

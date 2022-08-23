@@ -8,12 +8,20 @@ public class PrefabDeath : MonoBehaviour
     PlayerAttack playerattack;
 
     Rigidbody rb;
+    public bool damage;
+
+    ChangeMaterial health;
+    GameObject enemy;
+
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerattack = player.GetComponent<PlayerAttack>();
         rb = GetComponent<Rigidbody>();
+        damage = true;
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+        health = enemy.GetComponent<ChangeMaterial>();
 
     }
 
@@ -23,7 +31,6 @@ public class PrefabDeath : MonoBehaviour
         
     }
 
-
     void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Player"))
@@ -32,7 +39,20 @@ public class PrefabDeath : MonoBehaviour
             playerattack.count++;
             playerattack.Renaming();
             Destroy(gameObject);
-            
+        }
+
+        if(collision.collider.CompareTag("Floor"))
+        {
+            damage = false;
+            Debug.Log("Ya no hago daño");
+        }
+
+        if(collision.collider.CompareTag("Enemy") && damage == true)
+        {
+            health.live--;
         }
     }
+
+
+
 }

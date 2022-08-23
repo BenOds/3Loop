@@ -14,12 +14,16 @@ public class Chassing : MonoBehaviour
 
     bool chasingBoolean;
     public int chasingTime;
-    RigidBody rb;
+    Rigidbody rb;
 
+    GameObject floor;
+    
     void Start()
     {
-        rb = GetComponent<RigidBody>();
+        rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player"); 
+        // floor = GameObject.FindGameObjectWithTag("Floor"); 
+        
     }
 
     void Update()

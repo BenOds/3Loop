@@ -12,7 +12,7 @@ public class PlayerAttack : MonoBehaviour
 
     BoxCollider shadow;
 
-    [Header("Colission off gate")]
+    [Header("Collision off gate")]
     public float shadowtime;
 
     [Header("Direction Force")]
@@ -33,6 +33,8 @@ public class PlayerAttack : MonoBehaviour
 
     GameObject cloneball;
     GameObject ballborn;
+
+
     
 
 // -------------- Inicializers ---------------------
@@ -43,6 +45,8 @@ public class PlayerAttack : MonoBehaviour
         ammo = new string [6];
 
         Ammo();
+
+        
     }
 
     void Update()
@@ -86,7 +90,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
-        if (balls > 0)
+        if (balls > 0 )
         {
         cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
         cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0,directionY,directionZ) * Force);  
