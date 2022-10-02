@@ -30,4 +30,35 @@ public class GroundControl : MonoBehaviour
             SpawnCapsule spawnCapsule = rebirth.GetComponent<SpawnCapsule>();
             spawnCapsule.PositionSpawn();
     }
+
+    bool BallCheck()
+    {   
+        // Conseguimos Array con trodos los GO con tag Ball.
+        GameObject[] ball = GameObject.FindGameObjectsWithTag("Ball");
+
+        // Accedemos al Array para comprobar que cada GO tiene el bool False
+        // Si detecta que hay uno con True, termina el bucle y no hace acción.
+        // Si no encuentra True, procede a hacer acción.
+        // la Acción es darle al bool True.
+
+        // variable booleano del GO
+        bool compare = GameObject.controlName;
+
+        // Comprobamos que la variable controlName 
+        // del Prefab identificado con el tag "BAll" es false o true
+
+        if (ball < ball.maxlenght && compare == false)
+            {
+                for(i = 0; i >= 0 ; i++)
+                {
+                 
+                }
+            }
+            else
+            {
+            
+            }
+
+         return ball;
+    }
 }

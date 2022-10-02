@@ -16,6 +16,9 @@ public class PrefabDeath : MonoBehaviour
     GameObject parent;
     Transform child;
 
+    bool controlName;
+
+    
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -27,6 +30,8 @@ public class PrefabDeath : MonoBehaviour
         health = enemy.GetComponent<ChangeMaterial>();
 
         parent = GameObject.FindGameObjectWithTag("BallParent");
+
+        controlName = false;
         
         CheckingChild();
 

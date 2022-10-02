@@ -34,6 +34,14 @@ public class PlayerAttack : MonoBehaviour
     GameObject cloneball;
     GameObject ballborn;
 
+    // Collider
+    // bool controlName;
+    BoxCollider controlCollider;
+
+    PrefabDeath accessPrefabDeath;
+    bool controlName = accessPrefab.controlName;
+
+
 
     
 
@@ -43,10 +51,8 @@ public class PlayerAttack : MonoBehaviour
     {
         count = 0;
         ammo = new string [6];
-
-        Ammo();
-
-        
+        controlCollider = gameObject.GetComponent<BoxCollider>();
+        Ammo();     
     }
 
     void Update()
@@ -54,8 +60,7 @@ public class PlayerAttack : MonoBehaviour
         counting = balls+count;
         InputMouse();
         InputKey();
-        InputPad();
-        
+        InputPad();  
     }
 // ---------------------- INPUTS ---------------------
 
@@ -71,7 +76,6 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
-        
     }
 
     void InputPad()
@@ -104,16 +108,24 @@ public class PlayerAttack : MonoBehaviour
 
 // ---------------------- AMMO ---------------------
 
+bool Control()
+{
+     
+    return true;
+}
+
 // Detector de collision con nose prefab para "recolectar"
 // Aprovechamos para identificar el nombre que tiene adjudicado para listarlo en el array
-// Renombramos la ubicación del array con el nombre del rpefab que hemos recolectado.
+// Renombramos la ubicación del array con el nombre del prefab que hemos recolectado.
     void OnCollisionEnter (Collision collisionBullet)
     {
-        if(collisionBullet.collider.CompareTag("Ball"))
+        if(collisionBullet.collider.CompareTag("Ball") && controlCollider.enabled == true) // hay que añadir aquí el boleano
         {
+            controlCollider.enabled = false;
             rename = collisionBullet.gameObject.name;
-            Debug.Log("Recogiendo bala "+ rename);
+            Debug.Log("Recogiendo "+ rename);
             Renaming();
+
         }
     }
 
@@ -139,6 +151,8 @@ public class PlayerAttack : MonoBehaviour
     public void Renaming()
     {
         ammo[counting] = rename;
+        //controlName = true;
+
     }
 
 //  Borra los nombres en el Array a medida que el prefab "nose Prefab" se genera
