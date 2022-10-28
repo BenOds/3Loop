@@ -31,7 +31,7 @@ public class PrefabDeath : MonoBehaviour
 
         parent = GameObject.FindGameObjectWithTag("BallParent");
 
-        controlName = false;
+        // controlName = false;
         
         CheckingChild();
 

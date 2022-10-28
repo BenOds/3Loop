@@ -38,10 +38,11 @@ public class PlayerAttack : MonoBehaviour
     // bool controlName;
     BoxCollider controlCollider;
 
-    PrefabDeath accessPrefabDeath;
-    bool controlName = accessPrefab.controlName;
+    // PrefabDeath accessPrefabDeath;
+    // bool controlName = accessPrefab.controlName;
 
-
+    GameObject controlBall;
+    Collider ball;
 
     
 
@@ -52,6 +53,8 @@ public class PlayerAttack : MonoBehaviour
         count = 0;
         ammo = new string [6];
         controlCollider = gameObject.GetComponent<BoxCollider>();
+        // controlBall = gameObject.FindGameObjectWithTag("Ball");
+        // ball = controlBall.GetComponent<Collider>();
         Ammo();     
     }
 
@@ -121,7 +124,7 @@ bool Control()
     {
         if(collisionBullet.collider.CompareTag("Ball") && controlCollider.enabled == true) // hay que añadir aquí el boleano
         {
-            controlCollider.enabled = false;
+            // Physics.IgnoreCollision(controlCollider, ball, true);
             rename = collisionBullet.gameObject.name;
             Debug.Log("Recogiendo "+ rename);
             Renaming();

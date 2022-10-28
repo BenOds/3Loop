@@ -31,7 +31,7 @@ public class GroundControl : MonoBehaviour
             spawnCapsule.PositionSpawn();
     }
 
-    bool BallCheck()
+    /* bool BallCheck()
     {   
         // Conseguimos Array con trodos los GO con tag Ball.
         GameObject[] ball = GameObject.FindGameObjectsWithTag("Ball");
@@ -42,16 +42,20 @@ public class GroundControl : MonoBehaviour
         // la Acción es darle al bool True.
 
         // variable booleano del GO
-        bool compare = GameObject.controlName;
+        // bool compare = GameObject.controlName;
 
         // Comprobamos que la variable controlName 
         // del Prefab identificado con el tag "BAll" es false o true
 
-        if (ball < ball.maxlenght && compare == false)
+        if (ball[i] < ball.lenght)
             {
                 for(i = 0; i >= 0 ; i++)
                 {
-                 
+                 // comprobar true o false en la variable
+                 if (controlName == true)
+                 {
+                    
+                 }
                 }
             }
             else
@@ -60,5 +64,7 @@ public class GroundControl : MonoBehaviour
             }
 
          return ball;
-    }
+         
+
+    }*/
 }
