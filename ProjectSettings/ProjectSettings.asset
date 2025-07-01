@@ -922,11 +922,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: fa6d3343-879e-4985-9d34-2e81f6efdb5d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: 3Loop
+  organizationId: benods1138
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

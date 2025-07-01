@@ -15,20 +15,19 @@ public class SpawnCapsule : MonoBehaviour
 
     void Start()
     {
-        PositionSpawn(); 
+        PositionSpawn();
     }
 
     void Update()
     {
-        
+
     }
 
-    public void PositionSpawn ()
+    public void PositionSpawn()
     {
         positionX = Random.Range(-10, 10);
         positionZ = Random.Range(-10, 10);
-        Debug.Log(positionX);
-        Debug.Log(positionZ);
+        Debug.Log("Posición xz: " + positionX + ", " + positionZ);
         spawnPosition.position = new Vector3(positionX, 1, positionZ);
         ControlSpawn();
 
@@ -41,14 +40,14 @@ public class SpawnCapsule : MonoBehaviour
         }
         else
         {
-           Instantiate(spawnCapsulePrefab, spawnPosition.position, spawnPosition.rotation);
+            Instantiate(spawnCapsulePrefab, spawnPosition.position, spawnPosition.rotation);
         }
 
     }
 
 
 
-   
 
-    
+
+
 }
