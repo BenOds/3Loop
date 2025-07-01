@@ -44,8 +44,6 @@ public class PlayerAttack : MonoBehaviour
     GameObject controlBall;
     Collider ball;
 
-
-
     // -------------- Inicializers ---------------------
 
     void Start()
@@ -88,22 +86,24 @@ public class PlayerAttack : MonoBehaviour
 
     // ---------------------- MÉTODOS ---------------------
 
-    // Método para cuando queramos lanzar una "nariz"
-    // Instanciamos el prefab "nose prefab"
-    // Llamamos al método Naming para adjudicar nombre al prefab 
-    // generado del array
-    // Restamos en el contador de "balls" cada vez que generamos 
-    // un prefab
-    // Cambiamos el tag del prefab generado. De "ballBorn" a "ball"
-    // Borramos el nombre que hemos adjudicado al prefab del array
-
+    /* Attack
+    Método para cuando queramos lanzar una "nariz"
+    Instanciamos el prefab "nose prefab"
+    Llamamos al método Naming para adjudicar nombre al prefab generado del array
+    Restamos en el contador de "balls" cada vez que generamos un prefab
+    Cambiamos el tag del prefab generado. De "ballBorn" a "ball"
+    Borramos el nombre que hemos adjudicado al prefab del array 
+    */
     void Attack()
     {
         if (balls > 0)
         {
+            // Insanciar prefab de la nariz a disparar
             cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
+            // se le asigna al rpefab generado un rigidbody y aplicarle "fuerza" (dirección)
             cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, directionY, directionZ) * Force);
-            Naming();
+            // Cambiar el nombre del "nose prefab" cuando se genera por uno de los que se ha escogido. 
+            cloneball.name = ammo[balls - 1];
             balls--;
 
             Invoke("TagChange", shadowtime);
@@ -115,24 +115,22 @@ public class PlayerAttack : MonoBehaviour
 
     bool Control()
     {
-
         return true;
     }
 
-    // Detector de collision con nose prefab para "recolectar"
-    // Aprovechamos para identificar el nombre que tiene adjudicado 
-    // para listarlo en el array
-    // Renombramos la ubicación del array con el nombre del prefab 
-    // que hemos recolectado.
+    /* OnCollissionEnter
+    Detector de collision con nose prefab para "recolectar"
+    Aprovechamos para identificar el nombre que tiene adjudicado para listarlo en el array
+    Renombramos la ubicación del array con el nombre del prefab que hemos recolectado.
+    */
     void OnCollisionEnter(Collision collisionBullet)
     {
-        if (collisionBullet.collider.CompareTag("Ball") && controlCollider.enabled == true) // hay que añadir aquí el boleano
+        // hay que añadir aquí el boleano
+        if (collisionBullet.collider.CompareTag("Ball") && controlCollider.enabled == true)
         {
-            // Physics.IgnoreCollision(controlCollider, ball, true);
             rename = collisionBullet.gameObject.name;
             Debug.Log("Recogiendo " + rename);
-            Renaming();
-
+            ammo[counting] = rename;
         }
     }
 
@@ -151,23 +149,24 @@ public class PlayerAttack : MonoBehaviour
     // cuando se genera por uno de los que se ha escogido.
     void Naming()
     {
-        cloneball.name = ammo[balls - 1];
+        // se ha trasladado dentro del método Attack
+        // cloneball.name = ammo[balls-1];
     }
 
     // Para cambiar el nombre en el array, por el del "nose prefab"
     // que hemos recolectado en la ubicación que indicamos.
     public void Renaming()
     {
-        ammo[counting] = rename;
-        //controlName = true;
-
+        // se ha trasladado dentro del método OnCollisionEnter
+        // ammo[counting] = rename;
+        // controlName = true;
     }
 
-    //  Borra los nombres en el Array a medida que el prefab 
-    // "nose Prefab" se genera
+    // Indicamos que la celda del array queda vacía cuando se usa
+    // lo identificamos con EMPTY
     void Erase()
     {
-        ammo[balls] = "";
+        ammo[balls] = "EMPTY";
     }
 
     //  Input para comprobar por consola el orden de los nombres. 
@@ -192,7 +191,6 @@ public class PlayerAttack : MonoBehaviour
     // Input para "recargar" con "nose prefab" que se ha ido recolectando.
     public void Reload()
     {
-
         if (Input.GetKeyDown(KeyCode.R))
         {
             balls = count + balls;
