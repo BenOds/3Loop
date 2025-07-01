@@ -43,9 +43,7 @@ public class PlayerAttack : MonoBehaviour
 
     GameObject controlBall;
     Collider ball;
-
-    
-
+  
 // -------------- Inicializers ---------------------
 
     void Start()
@@ -161,13 +159,13 @@ Renombramos la ubicación del array con el nombre del prefab que hemos recolecta
         // se ha trasladado dentro del método OnCollisionEnter
         // ammo[counting] = rename;
         // controlName = true;
-
     }
 
-//  Borra los nombres en el Array a medida que el prefab "nose Prefab" se genera
+// Indicamos que la celda del array queda vacía cuando se usa
+// lo identificamos con EMPTY
     void Erase()
     {
-        ammo[balls] = "";
+        ammo[balls] = "EMPTY";
     }
  
 //  Input para comprobar por consola el orden de los nombres. 
@@ -192,8 +190,7 @@ Renombramos la ubicación del array con el nombre del prefab que hemos recolecta
 // Input para "recargar" con "nose prefab" que se ha ido recolectando.
     public void Reload()
     {
-      
-            if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             balls = count + balls;
             count = 0;
