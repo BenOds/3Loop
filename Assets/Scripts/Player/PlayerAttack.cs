@@ -6,8 +6,8 @@ public class PlayerAttack : MonoBehaviour
 {
 
     [Header("GameObjects Assignments")]
-    public GameObject ballPrefab;
-    public Transform SpawnBall;
+    public GameObject nosePrefab;
+    public Transform noseSpawnPosition;
 
 
     BoxCollider shadow;
@@ -16,27 +16,28 @@ public class PlayerAttack : MonoBehaviour
     public float shadowtime;
 
     [Header("Direction Force")]
-    public int Force;
-    public float directionZ;
-    public float directionY;
+    public int noseBulletForce;
+    public float noseBulletDirectionZ;
+    public float noseBulletDirectionY;
 
     [Header("Ammo")]
-    public int balls;
-    public int count;
+    public int noseBullet;
+    public int namePosittionArray;
     public int counting;
 
     int reload;
-    public string[] ammo;
+    // noseBulletNameArray: Array para las balas
+    public string[] noseBulletNameArray;
 
     string rename;
 
 
-    GameObject cloneball;
-    GameObject ballborn;
+    GameObject noseClonePrefab;
+    GameObject noseBorn;
 
     // Collider
     // bool controlName;
-    BoxCollider controlCollider;
+    BoxCollider noseControlCollider;
 
     // PrefabDeath accessPrefabDeath;
     // bool controlName = accessPrefab.controlName;
@@ -48,17 +49,15 @@ public class PlayerAttack : MonoBehaviour
 
     void Start()
     {
-        count = 0;
-        ammo = new string[6];
-        controlCollider = gameObject.GetComponent<BoxCollider>();
-        // controlBall = gameObject.FindGameObjectWithTag("Ball");
-        // ball = controlBall.GetComponent<Collider>();
+        namePosittionArray = 0;
+        noseBulletNameArray = new string[6];
+        noseControlCollider = gameObject.GetComponent<BoxCollider>();
         Ammo();
     }
 
     void Update()
     {
-        counting = balls + count;
+        counting = noseBullet + namePosittionArray;
         InputMouse();
         InputKey();
         InputPad();
@@ -90,21 +89,21 @@ public class PlayerAttack : MonoBehaviour
     Método para cuando queramos lanzar una "nariz"
     Instanciamos el prefab "nose prefab"
     Llamamos al método Naming para adjudicar nombre al prefab generado del array
-    Restamos en el contador de "balls" cada vez que generamos un prefab
-    Cambiamos el tag del prefab generado. De "ballBorn" a "ball"
+    Restamos en el contador de "noseBullet" cada vez que generamos un prefab
+    Cambiamos el tag del prefab generado. De "noseBorn" a "nose"
     Borramos el nombre que hemos adjudicado al prefab del array 
     */
     void Attack()
     {
-        if (balls > 0)
+        if (noseBullet > 0)
         {
             // Insanciar prefab de la nariz a disparar
-            cloneball = Instantiate(ballPrefab, SpawnBall.position, SpawnBall.rotation);
+            noseClonePrefab = Instantiate(nosePrefab, noseSpawnPosition.position, noseSpawnPosition.rotation);
             // se le asigna al rpefab generado un rigidbody y aplicarle "fuerza" (dirección)
-            cloneball.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, directionY, directionZ) * Force);
+            noseClonePrefab.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, noseBulletDirectionY, noseBulletDirectionZ) * noseBulletForce);
             // Cambiar el nombre del "nose prefab" cuando se genera por uno de los que se ha escogido. 
-            cloneball.name = ammo[balls - 1];
-            balls--;
+            noseClonePrefab.name = noseBulletNameArray[noseBullet - 1];
+            noseBullet--;
 
             Invoke("TagChange", shadowtime);
             Erase();
@@ -123,26 +122,26 @@ public class PlayerAttack : MonoBehaviour
     Aprovechamos para identificar el nombre que tiene adjudicado para listarlo en el array
     Renombramos la ubicación del array con el nombre del prefab que hemos recolectado.
     */
-    void OnCollisionEnter(Collision collisionBullet)
+    void OnCollisionEnter(Collision noseBulletCollision)
     {
         // hay que añadir aquí el boleano
-        if (collisionBullet.collider.CompareTag("Ball") && controlCollider.enabled == true)
+        if (noseBulletCollision.collider.CompareTag("Ball") && noseControlCollider.enabled == true)
         {
-            rename = collisionBullet.gameObject.name;
+            rename = noseBulletCollision.gameObject.name;
             Debug.Log("Recogiendo " + rename);
-            ammo[counting] = rename;
+            noseBulletNameArray[counting] = rename;
         }
     }
 
     // Los nombres de las narices en el array.
     void Ammo()
     {
-        ammo[0] = "Sherif";
-        ammo[1] = "Tabern";
-        ammo[2] = "Train Driver";
-        ammo[3] = "Gold Miner";
-        ammo[4] = "Indian";
-        ammo[5] = "Mexican";
+        noseBulletNameArray[0] = "Sherif";
+        noseBulletNameArray[1] = "Tabern";
+        noseBulletNameArray[2] = "Train Driver";
+        noseBulletNameArray[3] = "Gold Miner";
+        noseBulletNameArray[4] = "Indian";
+        noseBulletNameArray[5] = "Mexican";
     }
 
     // Para cambiar el nombre del "nose prefab" 
@@ -150,7 +149,7 @@ public class PlayerAttack : MonoBehaviour
     void Naming()
     {
         // se ha trasladado dentro del método Attack
-        // cloneball.name = ammo[balls-1];
+        // noseClone.name = noseBulletNameArray[noseBullet-1];
     }
 
     // Para cambiar el nombre en el array, por el del "nose prefab"
@@ -158,7 +157,7 @@ public class PlayerAttack : MonoBehaviour
     public void Renaming()
     {
         // se ha trasladado dentro del método OnCollisionEnter
-        // ammo[counting] = rename;
+        // noseBulletNameArray[counting] = rename;
         // controlName = true;
     }
 
@@ -166,7 +165,7 @@ public class PlayerAttack : MonoBehaviour
     // lo identificamos con EMPTY
     void Erase()
     {
-        ammo[balls] = "EMPTY";
+        noseBulletNameArray[noseBullet] = "EMPTY";
     }
 
     //  Input para comprobar por consola el orden de los nombres. 
@@ -174,11 +173,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (balls > 0)
+            if (noseBullet > 0)
             {
-                for (int i = (balls - 1); i >= 0; i--)
+                for (int i = (noseBullet - 1); i >= 0; i--)
                 {
-                    Debug.Log("bala " + (ammo[i]) + (" cargada"));
+                    Debug.Log("bala " + (noseBulletNameArray[i]) + (" cargada"));
                 }
             }
             else
@@ -193,21 +192,24 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            balls = count + balls;
-            count = 0;
+            noseBullet = namePosittionArray + noseBullet;
+            namePosittionArray = 0;
             Debug.Log("Recarga");
         }
     }
 
-    // Cambio de tag para el nose prefab que de origen es "ballBorn" y lo cambiamos por "ball"
-    // Esto se hace para que cuando identifiquemos el prefab recién generado y activemos su collider
-    // no haya conflicto con posibles prefabs generados anteriormente.
-    // Lo mismo sirve para cambiarles el nombre.
+    /* TagChange
+    Cambio de tag para el "nose prefab" que de origen es "noseBorn" 
+    y lo cambiamos por "nose"
+    Esto se hace para que cuando identifiquemos el prefab recién generado y activemos su collider
+    no haya conflicto con posibles prefabs generados anteriormente.
+    Lo mismo sirve para cambiarles el nombre.
+    */
     void TagChange()
     {
-        ballborn = GameObject.FindGameObjectWithTag("BallBorn");
-        ballborn.GetComponent<SphereCollider>().enabled = true;
-        ballborn.tag = "Ball";
+        noseBorn = GameObject.FindGameObjectWithTag("noseBorn");
+        noseBorn.GetComponent<SphereCollider>().enabled = true;
+        noseBorn.tag = "Ball";
 
         Debug.Log("nariz disparada");
 
