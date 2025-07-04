@@ -18,7 +18,7 @@ public class PrefabDeath : MonoBehaviour
 
     bool controlName;
 
-    
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -32,7 +32,7 @@ public class PrefabDeath : MonoBehaviour
         parent = GameObject.FindGameObjectWithTag("BallParent");
 
         // controlName = false;
-        
+
         CheckingChild();
 
     }
@@ -40,26 +40,26 @@ public class PrefabDeath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
-            rb.velocity = new Vector3 (0,0,0);
-            playerattack.count++;
+            rb.velocity = new Vector3(0, 0, 0);
+            playerattack.namePosittionArray++;
             playerattack.Renaming();
             Destroy(gameObject);
         }
 
-        if(collision.collider.CompareTag("Floor"))
+        if (collision.collider.CompareTag("Floor"))
         {
             damage = false;
             Debug.Log("Ya no hago daño");
         }
 
-        if(collision.collider.CompareTag("Enemy") && damage == true)
+        if (collision.collider.CompareTag("Enemy") && damage == true)
         {
             health.live--;
         }
@@ -67,7 +67,7 @@ public class PrefabDeath : MonoBehaviour
 
     void CheckingChild()
     {
-        gameObject.transform.SetParent(parent.transform,true);
+        gameObject.transform.SetParent(parent.transform, true);
     }
 
 
